@@ -69,15 +69,19 @@ class App(Tk):
         self.convert_button.place(x = 225, y = 135)
 
     def perform(self):
-        amount = float(self.amount_field.get())
-        from_curr = self.from_currency_variable.get()
-        to_curr = self.to_currency_variable.get()
+        try:
+            amount = float(self.amount_field.get())
+            from_curr = self.from_currency_variable.get()
+            to_curr = self.to_currency_variable.get()
 
-        converted_amount = self.currency_converter.convert(from_curr,to_curr,amount)
-        converted_amount = round(converted_amount, 2)
+            converted_amount = self.currency_converter.convert(from_curr,to_curr,amount)
+            converted_amount = round(converted_amount, 2)
 
-        self.converted_amount_field_label.config(text = str(converted_amount))
-
+            self.converted_amount_field_label.config(text = str(converted_amount))
+        except Exception as e:  
+            print('Error Occured, Please Input Float Value')
+            print(e)
+            
 if __name__ == '__main__':
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
     converter = RealTimeCurrencyConverter(url)
