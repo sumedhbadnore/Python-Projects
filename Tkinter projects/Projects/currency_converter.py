@@ -42,8 +42,7 @@ class App(Tk):
         self.date_label.place(x = 155, y= 50)
 
         # Entry box
-        valid = (self.register(self.restrictNumberOnly), '%d', '%P')
-        self.amount_field = Entry(self,bd = 3, relief = RIDGE, justify = CENTER,validate='key', validatecommand=valid)
+        self.amount_field = Entry(self,bd = 3, relief = RIDGE, justify = CENTER)
         self.converted_amount_field_label = Label(self, text = '', fg = 'black', bg = 'white', relief = RIDGE, justify = CENTER, width = 17, borderwidth = 3)
 
         # dropdown
@@ -78,11 +77,6 @@ class App(Tk):
         converted_amount = round(converted_amount, 2)
 
         self.converted_amount_field_label.config(text = str(converted_amount))
-    
-    def restrictNumberOnly(self, action, string):
-        regex = re.compile(r"[0-9,]*?(\.)?[0-9,]*$")
-        result = regex.match(string)
-        return (string == "" or (string.count('.') <= 1 and result is not None))
 
 if __name__ == '__main__':
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
